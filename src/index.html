@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+  <link rel="stylesheet" href="/build/kuku-ui.css">
+  <script type="module" src="/build/kuku-ui.esm.js"></script>
+  <script nomodule src="/build/kuku-ui.js"></script>
+</head>
+
+<body>
+  <my-component last="vis"></my-component>
+<hr/>
+  <ku-button id="test" color="primary">primary</ku-button>
+  <ku-button id="test" color="secondary">secondary</ku-button>
+  <ku-button id="test" color="accent">accent</ku-button>
+
+  <script>
+    let btn = document.getElementById('test');
+    // btn.loading = true;
+    btn.onclick = function (e) {
+      console.log('hi i am Abhi')
+    }
+  </script>
+
+</body>
+
+</html>

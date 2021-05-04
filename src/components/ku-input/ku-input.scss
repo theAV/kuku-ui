@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  font-family: var(--ku-font-family);
+}
+
+.ku-form-control {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  padding: 0 0;
+
+}
+
+.ku-form-control-rounded {
+  border-radius: 35px;
+}
+
+.ku-form-control-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 15px;
+  border-radius: 2px;
+  height: 35px;
+  border: 1px solid GetColor($grey-shades, false, 'dark-gray');
+
+  &.ku-focused {
+    border-color: GetColor($base-colors, 'primary');
+  }
+}
+
+.ku-floated-label {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+.ku-form-control-floated {
+  margin-top: 10px;
+
+  &.ku-focused,
+  &.ku-dirty {
+    .ku-floated-label {
+      transform: translateY(-1.28125em) scale(.75) perspective(100px) translateZ(.001px);
+      background-color: #fff;
+    }
+  }
+}
+
+
+.was-validated .ku-form-control-wrapper {
+
+  border-color: GetColor($state-color, false, 'error');
+}

@@ -1,0 +1,124 @@
+.ku-btn {
+    background-color: transparent;
+    border: none;
+    display: inline-flex;
+    padding: 0 15px;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: capitalize;
+    overflow: hidden;
+    font-family: var(--ku-font-family);
+    outline: none;
+    font-size: 1rem;
+    transition: background-color 0.1s ease-in-out;
+    text-decoration: none;
+    user-select: none;
+    box-sizing: border-box; 
+    &-disabled,
+    &:disabled {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+        box-shadow: none;
+    }
+
+    fill: currentColor;
+    position: relative;
+
+    &-fluid{
+        width: 100%;
+    }
+
+    &-loading{
+        pointer-events: none;
+        cursor: progress;
+        overflow: hidden;
+    }
+
+    &-rouded{
+        border-radius: 35px;
+    }
+
+}
+
+.ku-btn-ghost {
+    &:hover,
+    &:focus {
+        background-color: GetColor($grey-shades,false, 'white-smoke');
+    }
+
+    &.ku-btn-primary {
+        color: GetColor($base-colors, 'primary');
+    }
+
+    &.ku-btn-secondary {
+        color: GetColor($base-colors, 'secondary');
+    }
+
+     
+    &.ku-btn-accent {
+        color: GetColor($base-colors, 'accent');
+    } 
+}
+
+.ku-btn-flat,
+.ku-btn-raised {
+    color: #fff;
+
+    &.ku-btn-primary {
+        background-color: GetColor($base-colors, 'primary');
+
+        &:hover,
+        &:focus {
+            background-color: GetColor($base-colors, 'primary', 'dark');
+        }
+    }
+
+    &.ku-btn-secondary {
+        background-color: GetColor($base-colors, 'secondary');
+
+        &:hover,
+        &:focus {
+            background-color: GetColor($base-colors, 'secondary', 'dark');
+        }
+    }
+
+    &.ku-btn-accent {
+        background-color: GetColor($base-colors, 'accent');
+
+        &:hover,
+        &:focus {
+            background-color: GetColor($base-colors, 'accent', 'dark');
+        }
+    }
+}
+
+.ku-btn-raised {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.36);
+}
+
+.ku-btn-outline {
+    background-color: transparent;
+    border: 1px solid;
+    &:hover,
+    &:focus {
+        background-color: map-get($map: $grey-shades, $key: 'white-smoke');
+    }
+
+    &.ku-btn-primary {
+        color: GetColor($base-colors, 'primary');
+
+    }
+
+    &.ku-btn-secondary {
+        color: GetColor($base-colors, 'secondary');
+
+    }
+
+    &.ku-btn-accent {
+        color: GetColor($base-colors, 'accent');
+    }
+}
