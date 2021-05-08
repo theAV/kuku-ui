@@ -1,4 +1,6 @@
 import { Component, Prop, h, State } from '@stencil/core';
+import { ToastController } from '../../index';
+
 
 @Component({
   tag: 'my-component',
@@ -25,11 +27,19 @@ export class MyComponent {
 
   @State() isLoading: boolean = false;
 
-  // private toggleLoadingState = (): void => {
-  //   this.isLoading = !this.isLoading;
-  // }
+@State() i = 0 
+  
+  async presentToast() {
+      const toast = await ToastController.create({
+      msg: `i am toast from alert with icon ${++this.i}`,
+      closable: true,
+      duration: 5000
+    });
+    toast.toast();
+  }
 
-  componentDidLoad(){
+
+  componentDidLoad() {
     // setTimeout(()=>{
     //   this.first ='john';
     // }, 5000)
@@ -37,15 +47,21 @@ export class MyComponent {
 
   render() {
     return <div>
+      <br />
       <ku-form name="userForm" novalidate>
         <label>
-          user name
-          <ku-input id="username" variant="floated" type="email" required  placeholder="placeholder goes here..."/>
+          <ku-input id="username" type="text" required placeholder="Placeholder goes here...">
+            <span slot="label">I am Label</span>
+          </ku-input>
         </label>
         <ku-button rounded variant="flat" type="submit" color="primary">Submit</ku-button>
       </ku-form>
-      <hr/>
-      <ku-input id="username" variant="floated" type="email" required placeholder="placeholder goes here..."/>
+      <hr />
+      <ku-button rounded variant="flat" onClick={this.presentToast.bind(this)} color="primary">Show Toast</ku-button>
+      <br />
+      <ku-input variant="floated" type="email" required placeholder="placeholder goes here...">
+        <span slot="label">I am Label</span>
+      </ku-input>
       {/* <ku-button loading={this.isLoading} href="#" color="primary">
         primary
       </ku-button>
@@ -72,7 +88,7 @@ export class MyComponent {
       <br></br>
       <ku-button loading={this.isLoading} variant="outline" color="primary">primary</ku-button>
       <ku-button onClick={this.toggleLoadingState} variant="outline" color="secondary">secondary</ku-button>
-      <ku-button disabled variant="outline" color="accent">accent</ku-button> */}
+      <ku-button disabled variant="outline" color="accent">accent</ku-button>  */}
       {/* <ku-button onClick={this.printName.bind(this, 'primary')} variant="outline" loading={this.isLoading} color="primary">primary</ku-button>
       <ku-button onClick={this.toggleLoadingState} variant="outline" color="secondary">secondary</ku-button>
       <ku-button onClick={this.printName.bind(this, 'accent')} variant="outline" disabled color="accent">accent</ku-button> */}

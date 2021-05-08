@@ -1,0 +1,113 @@
+:host {
+  display: contents;
+  margin: 0px;
+}
+
+.#{$PREEFIX}-alert {
+  @include flex;
+  @include box-shadow();
+  font-family: var(--ku-font-family);
+  font-size: 0.875rem;
+  position: relative;
+  margin: 0;
+  align-items: stretch;
+  border: solid #e6e8ec;
+  border-width: 1px 1px 1px 3px;
+  border-left-style: solid;
+  background-color: GetColor($grey-shades, false, light);
+  border-radius: 0.35rem;
+  color: GetColor($grey-shades, false, grey-500);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+  margin-bottom: 15px;
+
+  &_message {
+    padding: GetSpecing(medium);
+    overflow: hidden;
+    flex: 1 1 auto;
+  }
+
+  &_icon,
+  &_close {
+    @include flex-center;
+    flex: 0 0 auto;
+  }
+
+  &_icon {
+    font-size: 22px;    
+    padding-left: GetSpecing(medium);
+  }
+
+  &_close {
+    padding-right: GetSpecing(medium);
+    .ku-btn{
+      font-size: 20px;
+    }
+  }
+
+  &_open {
+    opacity: 1;
+    transform: none;
+  }
+
+  &_primary {
+    border-left-color: GetColor($base-colors, primary);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($base-colors, primary);
+    }
+  }
+
+  &_secondary {
+    border-left-color: GetColor($base-colors, secondary);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($base-colors, secondary);
+    }
+  }
+
+  &_accent {
+    border-left-color: GetColor($base-colors, accent);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($base-colors, accent);
+    }
+  }
+
+  &_success {
+    border-left-color: GetColor($state-color, false, success);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($state-color, false, success);
+    }
+  }
+
+  &_alert {
+    border-left-color: GetColor($state-color, false, alert);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($state-color, false, alert);
+    }
+  }
+
+  &_error {
+    border-left-color: GetColor($state-color, false, error);
+
+    .#{$PREEFIX}-alert_icon {
+      color: GetColor($state-color, false, error);
+    }
+
+  }
+
+  &:not(.ku-alert_visible) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(0px, 0px, 0px, 0px);
+    clip-path: inset(50%);
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}

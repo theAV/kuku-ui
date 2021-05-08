@@ -6,6 +6,27 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface KuAlert {
+        "closable": boolean;
+        "duration": number;
+        "hide": () => Promise<void>;
+        "msg": string;
+        "open": boolean;
+        "show": () => Promise<void>;
+        "toast": () => Promise<void>;
+        "variant": 'primary' | 'secondary' | 'accent' | 'success' | 'alert' | 'error';
+    }
+    interface KuAvatar {
+        "height": string;
+        "icon": string;
+        /**
+          * First letter of first and last name
+         */
+        "initials": any;
+        "shape": 'circle' | 'rounded' | 'square';
+        "src": any;
+        "width": string;
+    }
     interface KuButton {
         "color": 'primary' | 'secondary' | 'accent';
         "disabled": boolean;
@@ -20,6 +41,9 @@ export namespace Components {
         "name": string;
         "novalidate": boolean;
     }
+    interface KuIcon {
+        "name": string;
+    }
     interface KuInput {
         "classes": string;
         "defaultValue": string;
@@ -27,7 +51,7 @@ export namespace Components {
         "required": boolean;
         "type": 'text' | 'password' | 'email';
         "value": string;
-        "variant": 'floated' | 'rounded';
+        "variant": 'legacy' | 'floated' | 'rounded';
     }
     interface KuSelect {
     }
@@ -47,6 +71,18 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLKuAlertElement extends Components.KuAlert, HTMLStencilElement {
+    }
+    var HTMLKuAlertElement: {
+        prototype: HTMLKuAlertElement;
+        new (): HTMLKuAlertElement;
+    };
+    interface HTMLKuAvatarElement extends Components.KuAvatar, HTMLStencilElement {
+    }
+    var HTMLKuAvatarElement: {
+        prototype: HTMLKuAvatarElement;
+        new (): HTMLKuAvatarElement;
+    };
     interface HTMLKuButtonElement extends Components.KuButton, HTMLStencilElement {
     }
     var HTMLKuButtonElement: {
@@ -58,6 +94,12 @@ declare global {
     var HTMLKuFormElement: {
         prototype: HTMLKuFormElement;
         new (): HTMLKuFormElement;
+    };
+    interface HTMLKuIconElement extends Components.KuIcon, HTMLStencilElement {
+    }
+    var HTMLKuIconElement: {
+        prototype: HTMLKuIconElement;
+        new (): HTMLKuIconElement;
     };
     interface HTMLKuInputElement extends Components.KuInput, HTMLStencilElement {
     }
@@ -78,14 +120,39 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "ku-alert": HTMLKuAlertElement;
+        "ku-avatar": HTMLKuAvatarElement;
         "ku-button": HTMLKuButtonElement;
         "ku-form": HTMLKuFormElement;
+        "ku-icon": HTMLKuIconElement;
         "ku-input": HTMLKuInputElement;
         "ku-select": HTMLKuSelectElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface KuAlert {
+        "closable"?: boolean;
+        "duration"?: number;
+        "msg"?: string;
+        "onAlert.hidden"?: (event: CustomEvent<void>) => void;
+        "onAlert.hide"?: (event: CustomEvent<void>) => void;
+        "onAlert.show"?: (event: CustomEvent<void>) => void;
+        "onAlert.shown"?: (event: CustomEvent<void>) => void;
+        "open"?: boolean;
+        "variant"?: 'primary' | 'secondary' | 'accent' | 'success' | 'alert' | 'error';
+    }
+    interface KuAvatar {
+        "height"?: string;
+        "icon"?: string;
+        /**
+          * First letter of first and last name
+         */
+        "initials"?: any;
+        "shape"?: 'circle' | 'rounded' | 'square';
+        "src"?: any;
+        "width"?: string;
+    }
     interface KuButton {
         "color"?: 'primary' | 'secondary' | 'accent';
         "disabled"?: boolean;
@@ -100,6 +167,9 @@ declare namespace LocalJSX {
         "name"?: string;
         "novalidate"?: boolean;
     }
+    interface KuIcon {
+        "name"?: string;
+    }
     interface KuInput {
         "classes"?: string;
         "defaultValue"?: string;
@@ -107,7 +177,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "type"?: 'text' | 'password' | 'email';
         "value"?: string;
-        "variant"?: 'floated' | 'rounded';
+        "variant"?: 'legacy' | 'floated' | 'rounded';
     }
     interface KuSelect {
     }
@@ -126,8 +196,11 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "ku-alert": KuAlert;
+        "ku-avatar": KuAvatar;
         "ku-button": KuButton;
         "ku-form": KuForm;
+        "ku-icon": KuIcon;
         "ku-input": KuInput;
         "ku-select": KuSelect;
         "my-component": MyComponent;
@@ -137,8 +210,11 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "ku-alert": LocalJSX.KuAlert & JSXBase.HTMLAttributes<HTMLKuAlertElement>;
+            "ku-avatar": LocalJSX.KuAvatar & JSXBase.HTMLAttributes<HTMLKuAvatarElement>;
             "ku-button": LocalJSX.KuButton & JSXBase.HTMLAttributes<HTMLKuButtonElement>;
             "ku-form": LocalJSX.KuForm & JSXBase.HTMLAttributes<HTMLKuFormElement>;
+            "ku-icon": LocalJSX.KuIcon & JSXBase.HTMLAttributes<HTMLKuIconElement>;
             "ku-input": LocalJSX.KuInput & JSXBase.HTMLAttributes<HTMLKuInputElement>;
             "ku-select": LocalJSX.KuSelect & JSXBase.HTMLAttributes<HTMLKuSelectElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;

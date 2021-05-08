@@ -18,11 +18,15 @@
 
 ### Depends on
 
+- [ku-form](../ku-form)
+- [ku-input](../ku-input)
 - [ku-button](../ku-button)
 
 ### Graph
 ```mermaid
 graph TD;
+  my-component --> ku-form
+  my-component --> ku-input
   my-component --> ku-button
   style my-component fill:#f9f,stroke:#333,stroke-width:4px
 ```

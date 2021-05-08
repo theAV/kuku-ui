@@ -1,0 +1,18 @@
+.ku-icon{
+  display: flex;
+}
+
+.ku-icon i { 
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  contain: strict;
+  box-sizing: content-box;
+}
+
+
+svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

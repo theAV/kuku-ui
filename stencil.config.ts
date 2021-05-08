@@ -3,6 +3,7 @@ import { sass } from '@stencil/sass';
 export const config: Config = {
   globalStyle:"src/global/styles/style.scss", 
   namespace: 'kuku-ui',
+  srcDir: 'src',
   plugins: [
     sass({
       injectGlobalPaths:[
@@ -10,6 +11,7 @@ export const config: Config = {
       ]
     })
   ],
+  bundles:[],
   outputTargets: [
     {
       type: 'dist',
@@ -20,6 +22,7 @@ export const config: Config = {
     },
     {
       type: 'docs-readme',
+      strict: true
     },
     {
       type: 'www',

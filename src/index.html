@@ -8,21 +8,153 @@
   <link rel="stylesheet" href="/build/kuku-ui.css">
   <script type="module" src="/build/kuku-ui.esm.js"></script>
   <script nomodule src="/build/kuku-ui.js"></script>
+  <style>
+    .main {
+      margin: auto;
+      max-width: 1000px;
+    }
+  </style>
 </head>
 
 <body>
-  <my-component last="vis"></my-component>
-<hr/>
-  <ku-button id="test" color="primary">primary</ku-button>
-  <ku-button id="test" color="secondary">secondary</ku-button>
-  <ku-button id="test" color="accent">accent</ku-button>
+
+  <!-- <ku-button id="test" color="secondary">secondary</ku-button>
+  <ku-button id="test" color="accent">accent</ku-button> -->
+  <section class="main">
+    <my-component last="vis"></my-component>
+    <hr />
+    <ku-button id="test">primary</ku-button>
+    <ku-button id="test2" color="secondary" variant="flat">secondary</ku-button>
+    <ku-alert id="alert" closable>
+      <ku-icon slot="icon" name="info-circle"></ku-icon>
+      I am primary alert!
+    </ku-alert>
+    <br>
+    <ku-avatar src="https://picsum.photos/id/63/100/100"></ku-avatar>
+    <ku-avatar shape="rounded" initials="AV"></ku-avatar>
+    <ku-avatar shape="square"></ku-avatar>
+    <br>
+    <br>
+    <ku-alert open closable  variant="secondary">
+      <ku-icon slot="icon" name="exclamation-circle"></ku-icon>
+      <strong>Your account has been deleted</strong>
+      <br>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis exercitationem libero, commodi doloribus molestias
+      aspernatur repudiandae accusamus unde quos consequuntur, nostrum quia quasi. Repellendus ut modi molestias aperiam
+      deleniti iste.
+    </ku-alert>
+    <br>
+    <ku-alert  variant="accent" closable>
+      <ku-icon slot="icon" name="gear"></ku-icon>
+      <strong>Your account has been deleted</strong>
+      <br>
+      We're very sorry to see you go!
+    </ku-alert>
+    <br>
+    <ku-alert  variant="success">
+      <ku-icon slot="icon" name="gem"></ku-icon>
+      <strong>Your account has been deleted</strong>
+      <br>
+      We're very sorry to see you go!
+    </ku-alert>
+    <br>
+    <ku-alert  variant="alert">
+      <ku-icon slot="icon" name="exclamation-octagon"></ku-icon>
+      <strong>Your account has been deleted</strong>
+      <br>
+      We're very sorry to see you go!
+    </ku-alert>
+    <br>
+    <ku-alert  variant="error">
+      <ku-icon slot="icon" name="alarm"></ku-icon>
+      <strong>Your account has been deleted</strong>
+      <br>
+      We're very sorry to see you go!
+    </ku-alert>
+    <br>
+
+  </section>
+
 
   <script>
     let btn = document.getElementById('test');
-    // btn.loading = true;
-    btn.onclick = function (e) {
-      console.log('hi i am Abhi')
+    let alertKu = document.getElementById('alert');
+    let test2 = document.getElementById('test2');
+    let icon = document.getElementById('icon');
+
+    // btn.onclick = () => {
+    //   alertKu.open = true;
+    // }
+    // alertKu.addEventListener('ku-show', (event) => {
+    //   setTimeout(() => {
+    //     alertKu.open = false;
+    //   }, 5000)
+    // });
+
+    // const toast = function (text, type) {
+    //   const body = document.getElementsByTagName('body')[0];
+    //   const container = document.createElement('div');
+
+    //   const f = function () {
+    //     // alert.open = true;
+
+    //     const div = document.createElement('ku-alert');
+
+    //     div.innerHTML = `<ku-icon slot="icon" name="emoji-sunglasses"></ku-icon>${text}`;
+
+    //     document.querySelector('.c').appendChild(div);
+    //     // div.setAttribute('open', true);
+    //     div.setAttribute('closable', true);
+    //     div.setAttribute('icon', true);
+    //     div.setAttribute('variant', type);
+
+    //     div.toast();
+
+    //     // setTimeout(() => {
+    //     //   div.setAttribute('open', false);
+    //     //   div.ontransitionend = function (event) {
+    //     //     div.remove();
+
+    //     //     // if (container.childNodes.length === 0) {
+    //     //     //   container.remove();
+    //     //     // };
+    //     //   }
+    //     // }, 5000);
+    //   }
+
+    //   if (!document.querySelector('.c')) {
+    //     body.append(container);
+    //     container.classList.add('c')
+    //     f();
+    //   } else {
+    //     f();
+    //   }
+
+    // }
+
+
+    function notify(message, type = 'error', icon = 'info', duration = 6000) {
+      const alert = Object.assign(document.createElement('ku-alert'), {
+        type: type,
+        closable: true,
+        duration: duration,
+        innerHTML: `
+        <ku-icon name="${icon}" slot="icon"></ku-icon>
+        ${message}
+      `
+      });
+
+      document.body.append(alert);
+      return alert.toast();
     }
+
+let i = 1;
+    btn.addEventListener('click', () => {
+      i = ++i; 
+      notify(`This is custom toast. ${i}`);
+    });
+
+
   </script>
 
 </body>

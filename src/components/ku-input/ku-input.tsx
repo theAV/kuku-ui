@@ -1,5 +1,4 @@
-import { Component, Prop, h, State, Watch } from '@stencil/core';
-import classname from 'classnames';
+import { Component, Prop, h, State, Watch, Host } from '@stencil/core';
 
 
 @Component({
@@ -15,20 +14,20 @@ export class KuInput {
 
   @Prop() placeholder: string;
 
-  @Prop() value: string = 'test';
+  @Prop({
+    mutable: true
+  }) value: string = null;
+  
   @Prop() defaultValue: string;
 
-  @Prop() variant: 'floated' | 'rounded';
+  @Prop() variant: 'legacy' | 'floated' | 'rounded' = 'legacy';
 
   @State() isFocused: boolean = false;
   @State() hasDirty: boolean = this.value ? true : false;
 
   el: HTMLInputElement;
 
-  getClasses = () => {
-    const outSideClasses = this.classes?.split(' ') || [];
-    return classname('ku-form-control', ...outSideClasses);
-  }
+
   changeHandler = () => {
     this.hasDirty = !this.el.validity.valueMissing || this.value ? true : false;
     // console.log(this.el.validity);
@@ -38,34 +37,50 @@ export class KuInput {
 
   @Watch('value')
   valueWatchHandler() {
-    this.changeHandler();
+    this.changeHandler(); 
   }
 
+  // [`ku-form-control-${this.variant}`]: !!this.variant,
+  //       'ku-focused': this.isFocused,
+  //       'ku-dirty': this.hasDirty,
   render() {
-    const placeholder = this.variant === 'floated' ? <label class="ku-floated-label">{this.placeholder}</label> : null;
     return (
-      <div class={{
-        'ku-form-control-wrapper': true,
-        [`ku-form-control-${this.variant}`]: !!this.variant,
+      <Host class={{
+        'ku-form-field': true,
         'ku-focused': this.isFocused,
         'ku-dirty': this.hasDirty,
+        [`ku-form-control-${this.variant}`]: !!this.variant
       }}>
-        <div style={{position:'relative'}}>
-        {placeholder}
-        <input
-          ref={(el) => this.el = el as HTMLInputElement}
-          onInput={() => this.value = this.el.value}
-          onFocus={() => this.isFocused = true}
-          onBlur={() => this.isFocused = false}
-          class={this.getClasses()}
-          value={this.value}
-          defaultValue={this.defaultValue}
-          placeholder={this.placeholder && this.variant !== 'floated' ? this.placeholder : null}
-          type={this.type}
-          required={this.required}
-        />
+        <div class="ku-form-field-wrapper">
+          <div class="ku-form-field-flex">
+            <div class="ku-form-field-infix">
+              <input
+                ref={(el) => this.el = el as HTMLInputElement}
+                onInput={() => this.value = this.el.value}
+                onFocus={() => this.isFocused = true}
+                onBlur={() => this.isFocused = false}
+                class="ku-input-element" 
+                value={this.value}
+                defaultValue={this.defaultValue}
+                placeholder={(this.variant === 'floated' && !this.isFocused) ? null : this.placeholder}
+                type={this.type}
+                required={this.required}
+              />
+              <span class="ku-form-field-label-wrapper">
+                <label class="ku-form-field-label">
+                  <slot name="label" />
+                </label>
+              </span>
+            </div>
+          </div>
+          {
+            this.variant === "floated" &&
+            <div class="ku-form-field-underline"></div>
+          }
+          {/* {placeholder} */}
+
         </div>
-      </div>
+      </Host>
     );
   }
 
